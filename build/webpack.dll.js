@@ -17,10 +17,7 @@ module.exports ={
         sourceMap: false
       })
     ]
-  },
-  resolve: {
-		extensions: ['.js', 'json']
-	},
+  }, 
   plugins: [
     new webpack.DllPlugin({
       context: path.resolve(__dirname, "../src"),
@@ -29,6 +26,7 @@ module.exports ={
     })
   ],
   resolve: {
+    extensions: ['.js', '.json'],
     alias: {
       'vue': 'vue/dist/vue.esm.js'
     }
