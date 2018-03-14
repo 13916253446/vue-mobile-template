@@ -1,13 +1,14 @@
-import './styles/var.styl';
 
-import Vue from 'vue';
+import viewportUnitsBuggyfill from 'viewport-units-buggyfill';
+import viewportUnitsBuggyfillHacks from 'viewport-units-buggyfill/viewport-units-buggyfill.hacks.js';
+import fastclick from 'fastclick';
 
-let vue = new Vue({
-  id: '#app',
-  data: {
-    name: '小崔'
-  },
-  template: '<div>123456</div>'
-}).$mount('#app');
 
-console.log(vue);
+//  处理vw单位兼容性
+window.onload = () => {
+  viewportUnitsBuggyfill.init({
+    hacks: viewportUnitsBuggyfillHacks
+  });
+  // 处理点击延迟
+  fastclick.attach(document.body);
+};
