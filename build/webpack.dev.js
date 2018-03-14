@@ -6,6 +6,7 @@ const config = require("./config");
 const loader = require("./loader");
 const friendlyErrorPlugin = require("friendly-errors-webpack-plugin");
 const chalk = require("chalk");
+const webpack = require("webpack");
 let cssLoader = ['css', 'styl'].map(item => {
   return {
     test: new RegExp(`\.${item}$`),
@@ -18,6 +19,7 @@ let cssLoader = ['css', 'styl'].map(item => {
 
 
 const devConfig = {
+  cache: true,
   output: {
     path: utils.resolve('../dist'),
     filename: 'js/[name].[hash:6].js',
@@ -39,12 +41,31 @@ const devConfig = {
       clearConsole: true,           
       additionalFormatters: [],
       additionalTransformers: []
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
   ], 
   module: {
     rules: [
       ...cssLoader
     ]
+  },
+  optimization: {
+    'namedModules': true,
+    'runtimeChunk': {
+      name: 'runtime'
+    },
+    'splitChunks': {
+      cacheGroups: {
+        common: {
+          name: 'common',
+          chunks: 'all',
+          // minSize: 1,
+          minChunks: 2,
+          enforce: true,
+        },
+      },
+    }
   },
   devServer: {
     ...config.server

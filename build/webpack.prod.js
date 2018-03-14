@@ -32,6 +32,10 @@ module.exports =webpackMerge(webpackCommon, {
     new miniCssExtractPlugin({
       filename: 'css/common.[chunkhash:8].css',
       chunkFilename: 'css/async/common.[chunkhash:8].css'
-    })
+    }),
+    new webpack.DllReferencePlugin({
+      context: utils.resolve("../src"),
+      manifest: require("../dll-manifest.json")
+    }),
   ]
 });

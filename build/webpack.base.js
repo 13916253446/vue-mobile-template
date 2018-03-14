@@ -4,8 +4,10 @@ const utils = require("./utils");
 const htmlWebpackPlugin = require("html-webpack-plugin");
 const eslintFrienylyFormate = require("eslint-friendly-formatter");
 const config = require("./config");
+const webpack = require("webpack");
 
-module.exports = {
+
+module.exports = {  
   entry: {
     index: utils.resolve('../src/index')
   },
@@ -53,6 +55,6 @@ module.exports = {
       template: utils.resolve('../src/index.html'),
       filename: 'index.html',
       inject: true
-    })
+    })    
   ]
 };
