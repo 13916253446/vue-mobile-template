@@ -1,0 +1,82 @@
+[
+  {
+    "timeStamp": 1521028512230,
+    "time": 3338,
+    "hash": "bc251bdfba762e891fbe",
+    "errors": [],
+    "size": 1959,
+    "assets": [
+      {
+        "name": "js/runtime.11ca8f9b.js",
+        "chunks": [
+          0
+        ],
+        "size": 1064,
+        "minified": true
+      },
+      {
+        "name": "css/async/common.85604238.css",
+        "chunks": [
+          1
+        ],
+        "size": 1
+      },
+      {
+        "name": "js/async/index.85604238.js",
+        "chunks": [
+          1
+        ],
+        "size": 310,
+        "minified": true
+      },
+      {
+        "name": "index.html",
+        "chunks": [],
+        "size": 584
+      }
+    ],
+    "chunks": [
+      {
+        "size": 0,
+        "files": [
+          "js/runtime.11ca8f9b.js"
+        ],
+        "modules": []
+      },
+      {
+        "size": 309,
+        "files": [
+          "css/async/common.85604238.css",
+          "js/async/index.85604238.js"
+        ],
+        "modules": [
+          {
+            "name": "delegated ../node_modules/_vue@2.5.16@vue/dist/vue.esm.js from dll-reference vendor",
+            "size": 42,
+            "id": 0
+          },
+          {
+            "name": "external \"vendor\"",
+            "size": 42,
+            "id": 1
+          },
+          {
+            "name": "css ./node_modules/_css-loader@0.28.10@css-loader!./node_modules/_postcss-loader@2.1.1@postcss-loader/lib??ref--8-2!./node_modules/_stylus-loader@3.0.2@stylus-loader??ref--8-3!./node_modules/_style-resources-loader@1.1.0@style-resources-loader/lib??ref--8-4!./src/styles/var.styl",
+            "size": 0,
+            "id": 2
+          },
+          {
+            "name": "./src/styles/var.styl",
+            "size": 39,
+            "id": 3
+          },
+          {
+            "name": "./src/index.js",
+            "size": 186,
+            "id": 4
+          }
+        ]
+      }
+    ]
+  }
+]

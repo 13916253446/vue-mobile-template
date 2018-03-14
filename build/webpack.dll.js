@@ -24,8 +24,13 @@ module.exports ={
   plugins: [
     new webpack.DllPlugin({
       context: path.resolve(__dirname, "../src"),
-      name: '[name]',
+      name: 'js/dll/[name].dll.[chunkhash:8]',
       path: path.resolve(__dirname, '../dll-manifest.json')        
     })
-  ]
+  ],
+  resolve: {
+    alias: {
+      'vue': 'vue/dist/vue.esm.js'
+    }
+  }
 };

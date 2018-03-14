@@ -5,6 +5,8 @@ const utils = require("./utils");
 const config = require("./config");
 const loader = require("./loader");
 const miniCssExtractPlugin = require("mini-css-extract-plugin");
+const uglifyjsWebpackPlugin = require("uglifyjs-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 let cssLoader = ['css', 'styl'].map(item => {
   return {
@@ -28,14 +30,43 @@ module.exports =webpackMerge(webpackCommon, {
       ...cssLoader
     ]
   },
+  optimization: {
+    'minimizer': [
+      new uglifyjsWebpackPlugin({
+        parallel: true,
+        sourceMap: false
+      })
+    ],
+    "noEmitOnErrors": true,     
+    'runtimeChunk': {
+      name: 'runtime'
+    },
+    'splitChunks': {
+      cacheGroups: {
+        common: {
+          name: 'common',
+          chunks: 'all',
+          minSize: 1024*10,
+          minChunks: 2,
+          enforce: true,
+        },
+        vendor: {
+          chunks: 'initial',
+          name: 'node',
+          priority: -10,
+          test: /node_modules\/(.*)\.js/
+        }
+      },
+    }
+  },
   plugins: [
     new miniCssExtractPlugin({
       filename: 'css/common.[chunkhash:8].css',
       chunkFilename: 'css/async/common.[chunkhash:8].css'
-    }),
-    new webpack.DllReferencePlugin({
-      context: utils.resolve("../src"),
-      manifest: require("../dll-manifest.json")
-    }),
+    }), 
+    new BundleAnalyzerPlugin({
+      analyzerPort: 8880,
+      openAnalyzer: true
+    })   
   ]
 });

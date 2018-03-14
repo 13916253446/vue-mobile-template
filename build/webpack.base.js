@@ -5,6 +5,7 @@ const htmlWebpackPlugin = require("html-webpack-plugin");
 const eslintFrienylyFormate = require("eslint-friendly-formatter");
 const config = require("./config");
 const webpack = require("webpack");
+const manifest= require("../dll-manifest.json");
 
 
 module.exports = {  
@@ -54,7 +55,19 @@ module.exports = {
     new htmlWebpackPlugin({
       template: utils.resolve('../src/index.html'),
       filename: 'index.html',
-      inject: true
-    })    
-  ]
+      inject: true,
+      vendor: manifest.name + '.js'
+    }),
+    new webpack.DllReferencePlugin({
+      context: utils.resolve("../src"),
+      name: 'vendor',
+      manifest
+    }),    
+  ],
+  resolve: {
+    alias: {
+      '@': utils.resolve("../src"),
+      'vue': 'vue/dist/vue.esm.js'
+    }
+  }
 };

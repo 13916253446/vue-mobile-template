@@ -49,24 +49,7 @@ const devConfig = {
     rules: [
       ...cssLoader
     ]
-  },
-  optimization: {
-    'namedModules': true,
-    'runtimeChunk': {
-      name: 'runtime'
-    },
-    'splitChunks': {
-      cacheGroups: {
-        common: {
-          name: 'common',
-          chunks: 'all',
-          // minSize: 1,
-          minChunks: 2,
-          enforce: true,
-        },
-      },
-    }
-  },
+  },  
   devServer: {
     ...config.server
   }
