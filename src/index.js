@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import App from '@/views/app';
 import viewportUnitsBuggyfill from 'viewport-units-buggyfill';
 import viewportUnitsBuggyfillHacks from 'viewport-units-buggyfill/viewport-units-buggyfill.hacks.js';
 import fastclick from 'fastclick';
@@ -16,5 +17,9 @@ window.onload = () => {
 };
 
 new Vue({
-  id: 'app'
+  id: 'app',
+  components: {
+    App
+  },
+  template: `<App />`
 }).$mount('#app');
