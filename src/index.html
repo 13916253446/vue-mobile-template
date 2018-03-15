@@ -2,15 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>[v-cload]{visibility: hidden;}</style>
 </head>
-<body>
-    <div id="app">
-      <div>{{name}}</div>
-    </div>
+<body class="f-28" ontouchstart>
+    <div id="app" v-cloak></div>
     <script src="<%= htmlWebpackPlugin.options.vendor %>"></script>
-  
 </body>
 </html>
