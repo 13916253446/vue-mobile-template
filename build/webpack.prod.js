@@ -43,20 +43,18 @@ module.exports =webpackMerge(webpackCommon, {
     },
     'splitChunks': {
       cacheGroups: {
-        common: {
-          name: 'common',
-          chunks: 'all',
-          minSize: 1024*10,
-          minChunks: 2,
-          enforce: true,
+        commons: {
+            test: /[\\/]node_modules[\\/]/,
+            name: "vendor",
+            chunks: "initial"
         },
-        vendor: {
-          chunks: 'initial',
-          name: 'node',
-          priority: -10,
-          test: /node_modules\/(.*)\.js/
+        asynccommons: {         
+            name: "asynccommons",
+            chunks: "async",
+            minChunks: 2,
+            minSize: 1024*10
         }
-      },
+      }      
     }
   },
   plugins: [
@@ -66,7 +64,7 @@ module.exports =webpackMerge(webpackCommon, {
     }), 
     new BundleAnalyzerPlugin({
       analyzerPort: 8880,
-      openAnalyzer: true
+      openAnalyzer: false
     })   
   ]
 });
