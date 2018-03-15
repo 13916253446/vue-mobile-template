@@ -7,6 +7,7 @@ const loader = require("./loader");
 const friendlyErrorPlugin = require("friendly-errors-webpack-plugin");
 const chalk = require("chalk");
 const webpack = require("webpack");
+const errorOverlayWebpackPlugin = require("error-overlay-webpack-plugin");
 let cssLoader = ['css', 'styl'].map(item => {
   return {
     test: new RegExp(`\.${item}$`),
@@ -43,7 +44,8 @@ const devConfig = {
       additionalTransformers: []
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    new errorOverlayWebpackPlugin()
   ], 
   module: {
     rules: [
