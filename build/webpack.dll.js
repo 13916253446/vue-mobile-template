@@ -1,6 +1,11 @@
 const path = require("path");
 const webpack = require("webpack");
 const uglifyjsWebpackPlugin = require("uglifyjs-webpack-plugin");
+
+let uglifyjs = process.env.NODE_ENV == 'production' ? [new uglifyjsWebpackPlugin({
+  parallel: true,
+  sourceMap: false
+})] : [];
 module.exports ={
   entry: {
     vendor: [path.resolve(__dirname, './dll.js')]
@@ -11,12 +16,7 @@ module.exports ={
     library: '[name]'
   },
   optimization: {
-    minimizer: [
-      new uglifyjsWebpackPlugin({
-        parallel: true,
-        sourceMap: false
-      })
-    ]
+    minimizer: [...uglifyjs]
   }, 
   plugins: [
     new webpack.DllPlugin({
@@ -28,7 +28,7 @@ module.exports ={
   resolve: {
     extensions: ['.js', '.json'],
     alias: {
-      'vue': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js'
     }
   }
 };

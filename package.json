@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+  "scripts": { 
+    "//": "# 运行所有代码检查和单元测试",   
+    "dev:dll": "cross-env NODE_ENV=development webpack --mode development --config build/webpack.dll.js --progress",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --mode development --config build/webpack.dev.js --progress",
-    "build": "cross-env NODE_ENV=production webpack --mode production --config build/webpack.prod.js --progress",
-    "build:dll": "webpack --mode production --config build/webpack.dll.js --progress"
+    "///": "# 生产环境构建vendor包",
+    "build:dll": "cross-env NODE_ENV=production webpack --mode production --config build/webpack.dll.js --progress",
+    "build": "cross-env NODE_ENV=production webpack --mode production --config build/webpack.prod.js --progress"
   },
   "repository": {
     "type": "git",
@@ -27,7 +29,6 @@
     "babel-loader": "^7.1.4",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
     "chalk": "^2.3.2",
@@ -70,6 +71,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "fastclick": "^1.0.6",
     "viewport-units-buggyfill": "^0.6.2",
