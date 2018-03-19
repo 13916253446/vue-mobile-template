@@ -52,7 +52,7 @@ module.exports = {
         include: config.projectInclude
       },
       {
-        test: /\.(png|gif|jpg|jpeg)$/,
+        test: /\.(png|gif|jpg|jpeg|webp)$/,
         loader: [
           {
             loader: 'url-loader',
@@ -68,7 +68,7 @@ module.exports = {
           {
             loader: 'svg-sprite-loader',
             options: {
-              options: { extract: true }
+              extract: true
             }
           },
           ...svgoLoader
