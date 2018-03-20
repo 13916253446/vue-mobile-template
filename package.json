@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": { 
-    "//": "# 运行所有代码检查和单元测试",   
+  "scripts": {
+    "//": "# 运行所有代码检查和单元测试",
     "dev:dll": "cross-env NODE_ENV=development webpack --mode development --config build/webpack.dll.js --progress",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --mode development --config build/webpack.dev.js --progress",
     "///": "# 生产环境构建vendor包",
@@ -42,6 +42,7 @@
     "eslint-loader": "^2.0.0",
     "eslint-plugin-vue": "^4.3.0",
     "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.11",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^3.0.6",
     "mini-css-extract-plugin": "^0.2.0",
@@ -60,6 +61,7 @@
     "svgo": "^1.0.5",
     "svgo-loader": "^2.1.0",
     "uglifyjs-webpack-plugin": "^1.2.3",
+    "url-loader": "^1.0.1",
     "vue-eslint-parser": "^2.0.3",
     "vue-loader": "^14.2.1",
     "vue-template-compiler": "^2.5.16",
