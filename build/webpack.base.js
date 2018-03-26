@@ -7,6 +7,7 @@ const config = require("./config");
 const webpack = require("webpack");
 const manifest= require("../dll-manifest.json");
 const svgSpritePlugin = require("svg-sprite-loader/plugin");
+const webpackbar = require("webpackbar");
 
 let svgoLoader = process.env.NODE_ENV === 'production' ? ['svgo-loader']: []
 
@@ -95,7 +96,8 @@ module.exports = {
       name: 'vendor',
       manifest
     }),
-    new svgSpritePlugin()    
+    new svgSpritePlugin(),
+    new webpackbar(),    
   ],
   resolve: {
     extensions: ['.js', '.vue', '.json'],
