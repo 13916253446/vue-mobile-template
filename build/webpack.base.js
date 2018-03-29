@@ -79,6 +79,8 @@ module.exports = {
   },
   plugins: [
     new htmlWebpackPlugin({
+      //  TODO:解决循环引用问题
+      chunksSortMode: 'none',
       template: utils.resolve('../src/index.html'),
       filename: 'index.html',
       inject: true,
