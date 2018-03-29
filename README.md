@@ -23,3 +23,12 @@ img {
   content: normal !important;
 }
 ```
+
+
+3. html-webpack-plugin导致报~~TypeError: Converting circular structure to JSON~~(循环引用错误)
+
+
+```
+//  解决办法
+html-webpack-plugin 增加chunksSortMode配置并设置为none
+```
