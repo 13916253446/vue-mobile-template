@@ -32,3 +32,13 @@ img {
 //  解决办法
 html-webpack-plugin 增加chunksSortMode配置并设置为none
 ```
+
+**4. 多线程loader编译**
+
+采用happypack编译，由于当前版本的happypack没有跟上webpack的版本，所有需要安装beta版本(**5.0.0-beta.3**)
+版本更新了以后，请更换
+
+
+```
+npm install --save-dev happypack@next
+```

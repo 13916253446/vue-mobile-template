@@ -8,8 +8,66 @@ const webpack = require("webpack");
 const manifest= require("../dll-manifest.json");
 const svgSpritePlugin = require("svg-sprite-loader/plugin");
 const webpackbar = require("webpackbar");
+const HappyPack = require("happypack");
+const os = require("os");
+const threadPool = HappyPack.ThreadPool({size: os.cpus().length});
+let svgoLoader = process.env.NODE_ENV === 'production' ? ['svgo-loader']: [];
 
-let svgoLoader = process.env.NODE_ENV === 'production' ? ['svgo-loader']: []
+
+//  配置多线程loader
+let happypackLoaders = [
+  new HappyPack({
+      id: 'eslint',
+      loaders: [
+        {
+          loader: 'eslint-loader',
+          options: {
+            formatter: eslintFrienylyFormate
+          }
+        }
+      ],
+      threadPool,
+      verbose: true
+  }),
+  new HappyPack({
+    id: 'vue',
+    loaders: [
+      {
+        loader: 'vue-loader',
+        options: config.vueLoaderOptions            
+      }
+    ],
+    threadPool,
+    verbose: true
+  }),
+  new HappyPack({
+    id: 'js',
+    loaders: [
+      {
+        loader: 'babel-loader',
+        options: {
+          cacheDirectory: true
+        }
+      }
+    ],
+    threadPool,
+    verbose: true
+  }),
+  new HappyPack({
+    id: 'img',
+    loaders: [
+      {
+        loader: 'url-loader',
+        options: {
+          limit: 1024,
+          name: 'img/[name].[hash:8].[ext]'
+        }
+      }
+    ],
+    threadPool,
+    verbose: true
+  })
+];
 
 module.exports = {  
   entry: {
@@ -20,48 +78,22 @@ module.exports = {
       {
         enforce: 'pre',
         test: /\.(vue|js)$/,
-        loader: [
-          {
-            loader: 'eslint-loader',
-            options: {
-              formatter: eslintFrienylyFormate
-            }
-          }
-        ],
+        use: 'happypack/loader?id=eslint',
         include: config.projectInclude
       },
       {
         test: /\.vue$/,
-        loader: [
-          {
-            loader: 'vue-loader',
-            options: config.vueLoaderOptions
-          }
-        ],
+        use: 'happypack/loader?id=vue',
         include: config.projectInclude
       },
       {
         test: /\.js$/,
-        loader: [
-          {
-            loader: 'babel-loader',
-            options: {
-              cacheDirectory: true
-            }
-          }
-        ],
+        use: 'happypack/loader?id=js',
         include: config.projectInclude
       },
       {
         test: /\.(png|gif|jpg|jpeg|webp)$/,
-        loader: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 1024
-            }
-          }
-        ]
+        use: 'happypack/loader?id=img'
       },
       {
         test: /\.svg$/,
@@ -99,13 +131,19 @@ module.exports = {
       manifest
     }),
     new svgSpritePlugin(),
-    new webpackbar(),    
+    new webpackbar(),
+    ...happypackLoaders    
   ],
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       '@': utils.resolve("../src"),
       'vue': 'vue/dist/vue.esm.js'
-    }
+    },
+    //  优化项目查找路径
+    modules: [
+      utils.resolve("../src"),
+      utils.resolve("../node_modules")
+    ]
   }
 };

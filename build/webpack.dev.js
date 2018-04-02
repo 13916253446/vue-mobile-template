@@ -8,15 +8,22 @@ const friendlyErrorPlugin = require("friendly-errors-webpack-plugin");
 const chalk = require("chalk");
 const webpack = require("webpack");
 const errorOverlayWebpackPlugin = require("error-overlay-webpack-plugin");
+
+const cssPlugin = require("./happyCssPlugin.js");
+let cssPlugins = [];
 let cssLoader = ['css', 'styl'].map(item => {
+  let options = {
+    baseStyle: utils.resolve('../src/styles/var.styl')
+  };
+  cssPlugins.push(cssPlugin.createCssPlugin(item, options))
   return {
     test: new RegExp(`\.${item}$`),
-    loader: loader.createCssLoader(item, {
-      baseStyle: utils.resolve('../src/styles/var.styl')
-    }),
+    loader: `happypack/loader?id=${item}`,
     include: config.projectInclude   
   }
 });
+
+
 
 
 const devConfig = {
@@ -45,7 +52,8 @@ const devConfig = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new errorOverlayWebpackPlugin()
+    new errorOverlayWebpackPlugin(),
+    ...cssPlugins
   ], 
   module: {
     rules: [
