@@ -49,12 +49,14 @@ let createCssLoader = (type = 'css', options = {}) => {
 
   if (extract) {
    return [
+     'cache-loader',
     miniCssExtractPlugin.loader,
     ...defaultCssLoader,
     ...currentLoaders
    ]
   } else {
     return [
+      'cache-loader',
       'style-loader',
       ...defaultCssLoader,
       ...currentLoaders

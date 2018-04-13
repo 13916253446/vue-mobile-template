@@ -19,6 +19,7 @@ let happypackLoaders = [
   new HappyPack({
       id: 'eslint',
       loaders: [
+        'cache-loader',
         {
           loader: 'eslint-loader',
           options: {
@@ -32,6 +33,7 @@ let happypackLoaders = [
   new HappyPack({
     id: 'vue',
     loaders: [
+      'cache-loader',
       {
         loader: 'vue-loader',
         options: config.vueLoaderOptions            
@@ -43,6 +45,7 @@ let happypackLoaders = [
   new HappyPack({
     id: 'js',
     loaders: [
+      'cache-loader',
       {
         loader: 'babel-loader',
         options: {
@@ -52,21 +55,7 @@ let happypackLoaders = [
     ],
     threadPool,
     verbose: true
-  }),
-  new HappyPack({
-    id: 'img',
-    loaders: [
-      {
-        loader: 'url-loader',
-        options: {
-          limit: 1024,
-          name: 'img/[name].[hash:8].[ext]'
-        }
-      }
-    ],
-    threadPool,
-    verbose: true
-  })
+  }) 
 ];
 
 module.exports = {  
@@ -92,19 +81,16 @@ module.exports = {
         include: config.projectInclude
       },
       {
-        test: /\.(png|gif|jpg|jpeg|webp)$/,
-        use: 'happypack/loader?id=img'
-      },
-      {
-        test: /\.svg$/,
+        test: /\.(png|gif|jpg|jpeg|webp|svg)$/,
         loader: [
+          'cache-loader',
           {
-            loader: 'svg-sprite-loader',
+            loader: 'url-loader',
             options: {
-              extract: true
+              limit: 1024,
+              name: 'img/[name].[hash:8].[ext]'
             }
-          },
-          ...svgoLoader
+          }
         ]
       }
     ]
