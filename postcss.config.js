@@ -8,14 +8,15 @@ module.exports={
     "autoprefixer": {
       "browsers": config.browsers
     },  
-    "postcss-px-to-viewport": { 
+    "postcss-px-to-viewport-c": { 
       viewportWidth: 750, 
       viewportHeight: 1334, 
       unitPrecision: 3, 
       viewportUnit: 'vw', 
       selectorBlackList: ['.ignore', '.hairlines'], 
       minPixelValue: 1, 
-      mediaQuery: false 
+      mediaQuery: false,
+      exclude: /(\/|\\)(node_modules)(\/|\\)/
     }, 
     "postcss-viewport-units":{
       /* 过滤原本带有content属性的元素 */

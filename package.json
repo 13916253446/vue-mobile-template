@@ -49,7 +49,7 @@
     "mini-css-extract-plugin": "^0.2.0",
     "postcss-import": "^11.1.0",
     "postcss-loader": "^2.1.1",
-    "postcss-px-to-viewport": "^0.0.3",
+    "postcss-px-to-viewport-c": "^0.0.4",
     "postcss-url": "^7.3.1",
     "postcss-viewport-units": "^0.1.3",
     "postcss-write-svg": "^3.0.1",
