@@ -18,8 +18,7 @@ let cssLoader = ['css', 'styl'].map(item => {
   cssPlugins.push(cssPlugin.createCssPlugin(item, options))
   return {
     test: new RegExp(`\.${item}$`),
-    loader: `happypack/loader?id=${item}`,
-    include: config.projectInclude   
+    loader: `happypack/loader?id=${item}`
   }
 });
 

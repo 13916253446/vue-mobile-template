@@ -16,8 +16,7 @@ let cssLoader = ['css', 'styl'].map(item => {
     loader: loader.createCssLoader(item, {
       baseStyle: utils.resolve('../src/styles/var.styl'),
       extract: true
-    }),
-    include: config.projectInclude   
+    })
   }
 });
 
