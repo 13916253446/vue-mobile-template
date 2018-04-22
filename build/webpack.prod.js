@@ -8,6 +8,7 @@ const miniCssExtractPlugin = require("mini-css-extract-plugin");
 const uglifyjsWebpackPlugin = require("uglifyjs-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 let cssLoader = ['css', 'styl'].map(item => {
   return {
@@ -36,7 +37,8 @@ module.exports =webpackMerge(webpackCommon, {
       new uglifyjsWebpackPlugin({
         parallel: true,
         sourceMap: false
-      })
+      }),
+      new OptimizeCSSAssetsPlugin({})
     ],
     "noEmitOnErrors": true,     
     'runtimeChunk': {
