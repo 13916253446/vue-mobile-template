@@ -6,7 +6,6 @@ const eslintFrienylyFormate = require("eslint-friendly-formatter");
 const config = require("./config");
 const webpack = require("webpack");
 const manifest= require("../dll-manifest.json");
-const svgSpritePlugin = require("svg-sprite-loader/plugin");
 const webpackbar = require("webpackbar");
 const HappyPack = require("happypack");
 const os = require("os");
@@ -116,7 +115,6 @@ module.exports = {
       name: 'vendor',
       manifest
     }),
-    new svgSpritePlugin(),
     new webpackbar(),
     ...happypackLoaders    
   ],
