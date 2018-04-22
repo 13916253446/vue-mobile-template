@@ -54,6 +54,12 @@ module.exports =webpackMerge(webpackCommon, {
             chunks: "async",
             minChunks: 2,
             minSize: 1024*10
+        },
+        styles: {
+          name: 'styles',
+          test: /\.(css|styl|stylus|sass|scss|less)$/,
+          chunks: 'all',
+          enforce: true
         }
       }      
     }
@@ -61,18 +67,18 @@ module.exports =webpackMerge(webpackCommon, {
   plugins: [
     new miniCssExtractPlugin({
       filename: 'css/common.[chunkhash:8].css',
-      chunkFilename: 'css/async/common.[chunkhash:8].css'
+      /* chunkFilename: 'css/async/common.[chunkhash:8].css' */
     }), 
-    new BundleAnalyzerPlugin({
+    /* new BundleAnalyzerPlugin({
       analyzerPort: 8880,
       openAnalyzer: false
-    }),
-    new CompressionWebpackPlugin({
+    }), */
+   /*  new CompressionWebpackPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',
       test: /\.js$|\.css$/,
       threshold: 10240,
       minRatio: 0.8
-    })    
+    }) */    
   ]
 });
