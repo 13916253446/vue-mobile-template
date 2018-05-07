@@ -37,7 +37,8 @@ module.exports =webpackMerge(webpackCommon, {
         parallel: true,
         sourceMap: false
       }),
-      new OptimizeCSSAssetsPlugin({})
+      //  TODO:optimize-css-assets-webpack-plugin插件会移除掉一些css属性（例如:-webkit-box-orient）
+     /*  new OptimizeCSSAssetsPlugin({}) */
     ],
     "noEmitOnErrors": true,     
     'runtimeChunk': {

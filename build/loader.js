@@ -3,7 +3,10 @@ const miniCssExtractPlugin = require("mini-css-extract-plugin");
 
 let defaultCssLoader = [  
   {
-    loader: 'css-loader'
+    loader: 'css-loader',
+    options: {
+      minimize: process.env.NODE_ENV === 'production'
+    }
   },
   {
     loader: 'postcss-loader',
